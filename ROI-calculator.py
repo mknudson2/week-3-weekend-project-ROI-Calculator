@@ -1,37 +1,3 @@
-"""
-The purpose of this program is to create an app that will show the user the ROI percentage upon filling out the necessary information:
-    1. Monthly Income
-    2. Monthly Expenses
-    3. Investment costs (down-payment, closing costs, repairs/rehab, etc.)
-    
-In turn, the calculator will show them:
-    a. Monthly Cashflow (Income - Expenses)
-    b. Cash-on-Cash ROI Percentage (the percentage of the return on what they have invested into the property)
-    
-Ideally, it would also pull in information from Zillow, allowing the user to gain additional data related to the desired area.
-Things that it can include could be:
-    I. the Zestimate (i.e., Zillow's best estimate of the home's market value, this takes into account factors like neighborhood details, home fact, listing price, etc.)
-    II. estimated mortgage rate
-    III. Monthly cost estimates
-        i. principal and interest
-        ii. mortage insurance
-        iii. property taxes
-        iv. home insurance
-        v. HOA fees
-        vi. utilities
-    IV. Zillow's Rental Estimate (Rent Zestimate)
-    V. Information about local schools (if desired)
-    VI. Neighborhood Score
-
-Lastly, it would be ideal to turn this into an accessible, user-friendly package by having a GUI that the user can easily access, input information, and view the results. This would require some extra work, but Tkinter + JS might work, or we could explore other GUIs.
-
-Steps:
-1. Create a program that performs the necessary calculations to produce the ROI while checking validation and error handling.
-2. Incorporate Zillow API to access the necessary data
-3. Lay out our GUI with the desired look, feel, needs, and features that we want to incorporate
-4. Build the GUI and test  
-"""
-
 class RentalROI:
     
     def __init__(self):
@@ -202,23 +168,23 @@ class RentalROI:
             if user_choice == "change":
                 user_change_prompt = input('What would you like to change? \nIncome | Expenses | Investments | Back\n').lower()
                 if user_change_prompt == "income":
-                    income = self.income()  # Update income information
+                    income = self.income()  #updates income info
                     self.monthly_cash_flow(income, self.expenses_value)
-                    self.roi()  # Recalculate ROI using existing total investment
+                    self.roi()  # recalcs ROI using existing total investment and expenses
                 elif user_change_prompt == "expenses":
-                    expenses = self.expenses()  # Update expenses information
-                    self.monthly_cash_flow(self.income_value, expenses)  # Recalculate monthly cash flow using existing income
-                    self.roi()  # Recalculate ROI using existing total investment
+                    expenses = self.expenses()  # updates expenses info
+                    self.monthly_cash_flow(self.income_value, expenses)  # recalcs monthly cash flow using existing income
+                    self.roi()  # recalcs ROI using existing totals
                 elif user_change_prompt == "investments":
-                    self.investment()  # Update investment information
-                    self.roi()  # Recalculate ROI
+                    self.investment()  # updates investment info
+                    self.roi()  # recalcs ROI using existing totals
                 elif user_change_prompt == "back":
-                    self.end_choice()  # Go back to the previous menu
+                    self.end_choice()  # go back to the previous menu
                 else:
                     print('Sorry, please check your spelling or enter a valid response: Income/Expenses/Investment or back')
             elif user_choice == "new":
-                self.new_reset() # Resets the values so the user can start fresh
-                self.driver()  # Start a new evaluation
+                self.new_reset() # resets the values so the user can start fresh
+                self.driver()  # starts a new evaluation
             elif user_choice == "done":
                 print('')
                 print('Thank you for using our calculator! I hope you have a good day. \n Happy Investing!')
@@ -230,9 +196,9 @@ class RentalROI:
         income = self.income()
         expenses = self.expenses()
         self.cash_flow = self.monthly_cash_flow(income, expenses)
-        self.investment()  # Update the total investment value
-        self.annual_cash_flow = self.cash_flow * 12  # Calculate annual cash flow
-        self.roi()  # Pass the actual cash flow and total investment
+        self.investment()  # updates the total investment value
+        self.annual_cash_flow = self.cash_flow * 12  # calculates annual cash flow
+        self.roi()  # calculates annual cash flow / total investment
         self.end_choice()
 
 roi_calculator = RentalROI()
